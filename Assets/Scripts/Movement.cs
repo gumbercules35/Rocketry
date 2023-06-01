@@ -34,7 +34,8 @@ public class Movement : MonoBehaviour
 
     private void ProcessRotate(){
         Vector3 rotationVector = new Vector3(0, 0, rawRotateInput.x) * rotationSpeed * Time.deltaTime;
-        transform.Rotate(rotationVector);
+        transform.Rotate(rotationVector); 
+              
     }
 
     private void ProcessThrust(){
