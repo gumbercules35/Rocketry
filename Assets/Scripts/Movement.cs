@@ -7,7 +7,8 @@ public class Movement : MonoBehaviour
 {
     private Vector3 rawRotateInput;
     private float rotationSpeed = 45f;
-    private float thrustPower = 100f;
+    [SerializeField] private float rotationThrustPower = 120f;
+
     private bool isThrusting = false;
 
     private Rigidbody rocketRB;
@@ -37,8 +38,7 @@ public class Movement : MonoBehaviour
     }
 
     private void ProcessThrust(){
-        Vector3 thrustDirection = transform.up * thrustPower * Time.deltaTime;
+        Vector3 thrustDirection = transform.up * rotationThrustPower* Time.deltaTime;
         rocketRB.AddRelativeForce(thrustDirection);
-        Debug.Log(thrustDirection);
     }
 }
