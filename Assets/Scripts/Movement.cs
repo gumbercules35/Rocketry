@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
     private Vector3 rawRotateInput;
-    private float rotationSpeed = 45f;
+    private float rotationSpeed = 65f;
     [SerializeField] private float rotationThrustPower = 120f;
 
     private bool isThrusting = false;
@@ -38,8 +38,8 @@ public class Movement : MonoBehaviour
     }
 
     private void ProcessThrust(){
-        Vector3 thrustDirection = transform.up * rotationThrustPower* Time.deltaTime;
+        rocketRB.velocity = (rocketRB.velocity + new Vector3 (0, 4f, 0) * Time.deltaTime);
+        Vector3 thrustDirection = Vector3.up * rotationThrustPower* Time.deltaTime;
         rocketRB.AddRelativeForce(thrustDirection);
-        rocketRB.velocity = (rocketRB.velocity + new Vector3 (0, 7.5f, 0) * Time.deltaTime);
     }
 }
