@@ -40,5 +40,6 @@ public class Movement : MonoBehaviour
     private void ProcessThrust(){
         Vector3 thrustDirection = transform.up * rotationThrustPower* Time.deltaTime;
         rocketRB.AddRelativeForce(thrustDirection);
+        rocketRB.velocity = (rocketRB.velocity + new Vector3 (0, 7.5f, 0) * Time.deltaTime);
     }
 }
