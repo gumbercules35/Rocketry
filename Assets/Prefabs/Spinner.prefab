@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4449256716352799202}
   - component: {fileID: 4449256716352799203}
   - component: {fileID: 4173094489798700810}
+  - component: {fileID: 2128071596170491773}
   m_Layer: 0
   m_Name: Spinner
   m_TagString: Obstacle
@@ -122,5 +123,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6af1147e863b0e4ab165f8edb7ee6bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2128071596170491773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4449256716352799212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a02ba91237dcc624a8f9c537f6badf2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

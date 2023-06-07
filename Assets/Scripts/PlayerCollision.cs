@@ -9,8 +9,9 @@ public class PlayerCollision : MonoBehaviour
     private bool hasCollided;
     private AudioHandler audioHandler;
     [SerializeField] private AudioClip explodeSFX;
+    [SerializeField] private ParticleSystem explodeParticles;
     [SerializeField] private AudioClip landedSFX;
-
+ 
     private void Awake() {
         playerMovement = GetComponent<Movement>();
 
@@ -19,23 +20,27 @@ public class PlayerCollision : MonoBehaviour
         audioHandler = GetComponentInChildren<AudioHandler>();
     }
     private void OnCollisionEnter(Collision other) {
+        if (hasCollided){
+            return;
+        }
+
         string collidedTag = other.gameObject.tag;
 
         switch (collidedTag)
         {
             case "FinishPad":
-                if (!hasCollided){
+                    other.gameObject.GetComponentInChildren<ParticleSystem>().Play();
+                    audioHandler.source.Stop();
                     audioHandler.PlayClip(landedSFX);
                     StartCoroutine(LoadNextScene());                    
                     hasCollided = true;
-                }
                 break;
             case "Obstacle":
-                if (!hasCollided){
+                    explodeParticles.Play();
+                    audioHandler.source.Stop();
                     audioHandler.PlayClip(explodeSFX);
                     StartCoroutine(ReloadScene());
                     hasCollided = true;
-                }
                 break;
             default:
                 break;

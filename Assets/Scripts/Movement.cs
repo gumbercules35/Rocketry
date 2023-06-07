@@ -13,7 +13,8 @@ public class Movement : MonoBehaviour
 
     private Rigidbody rocketRB;
     private AudioHandler playerAudioHandler;
-
+    [SerializeField] private ParticleSystem engineParticles;
+    [SerializeField] private Light engineLights;
 
     private bool isEnabled = true;
     
@@ -29,15 +30,33 @@ public class Movement : MonoBehaviour
     void Update()
     {
        
-       if (isEnabled){
+       if (isEnabled)
+        {
+            ProcessPlayer();
+        }
+
+    }
+
+    private void ProcessPlayer()
+    {
         ProcessRotate();
-        if(isThrusting){
+
+        if (isThrusting)
+        {
             ProcessThrust();
-        }else if (playerAudioHandler.source.isPlaying) {
-            
+        }
+        else if (!isThrusting)
+        {
+            if(engineParticles.isPlaying){
+                engineParticles.Stop();
+            }
+            engineLights.enabled = false;
+        }
+        else if (playerAudioHandler.source.isPlaying)
+        {
+
             playerAudioHandler.source.Stop();
-        }}
-        
+        }
     }
 
     private void OnRotate(InputValue value){
@@ -46,6 +65,11 @@ public class Movement : MonoBehaviour
 
     private void OnThrust(InputValue value){
         isThrusting = value.isPressed;
+    }
+
+    private void OnQuit(){
+        Debug.Log("Escape");
+        Application.Quit();
     }
 
     public void SetEnabled(bool toggle){
@@ -64,8 +88,14 @@ public class Movement : MonoBehaviour
             playerAudioHandler.source.Play();
             
         }
+        engineLights.enabled = true;
+
         rocketRB.velocity = (rocketRB.velocity + new Vector3 (0, 4f, 0) * Time.deltaTime);
         Vector3 thrustDirection = Vector3.up * rotationThrustPower* Time.deltaTime;
         rocketRB.AddRelativeForce(thrustDirection);
+        
+        if (!engineParticles.isPlaying){
+            engineParticles.Play();
+            }
     }
 }
