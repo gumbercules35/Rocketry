@@ -8,7 +8,7 @@ public class ObstacleCollision : MonoBehaviour
         Player player = other.gameObject.GetComponent<Player>();
 
         if (player != null){
-            Debug.Log("Boink!");
+            
         }
     }
 }

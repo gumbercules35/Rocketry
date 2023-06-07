@@ -13,9 +13,14 @@ public class PlayerCollision : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other) {
         string collidedTag = other.gameObject.tag;
+        
         switch (collidedTag)
         {
             case "FinishPad":
+                if (!hasCollided){
+                    StartCoroutine(LoadNextScene());                    
+                    hasCollided = true;
+                }
                 break;
             case "Obstacle":
                 if (!hasCollided){
@@ -29,9 +34,23 @@ public class PlayerCollision : MonoBehaviour
     }
 
     private IEnumerator ReloadScene(){
-        Debug.Log("CallCheck");
         playerMovement.SetEnabled(false);
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private IEnumerator LoadNextScene(){
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+
+        if (nextSceneIndex >= SceneManager.sceneCountInBuildSettings){
+            nextSceneIndex = 0;
+        }
+
+        playerMovement.SetEnabled(false);
+
+        yield return new WaitForSeconds(2f);
+
+        SceneManager.LoadScene(nextSceneIndex);
     }
 }
