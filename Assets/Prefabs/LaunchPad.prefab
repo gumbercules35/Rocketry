@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7007482542183565590}
   m_Layer: 0
   m_Name: LaunchPad
-  m_TagString: Untagged
+  m_TagString: StartPad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
