@@ -12,9 +12,8 @@ public class Movement : MonoBehaviour
     private bool isThrusting = false;
 
     private Rigidbody rocketRB;
-    private AudioSource playerAudioSource;
-    private float initialVolume;
-    private float fadeTime = 20000000f;
+    private AudioHandler playerAudioHandler;
+
 
     private bool isEnabled = true;
     
@@ -24,8 +23,8 @@ public class Movement : MonoBehaviour
     }
 
     private void Start() {
-        playerAudioSource = gameObject.GetComponentInChildren<AudioSource>();
-        initialVolume = playerAudioSource.volume;
+        playerAudioHandler = gameObject.GetComponentInChildren<AudioHandler>();
+
     }
     void Update()
     {
@@ -34,9 +33,9 @@ public class Movement : MonoBehaviour
         ProcessRotate();
         if(isThrusting){
             ProcessThrust();
-        }else if (playerAudioSource.isPlaying) {
+        }else if (playerAudioHandler.source.isPlaying) {
             
-            playerAudioSource.Stop();
+            playerAudioHandler.source.Stop();
         }}
         
     }
@@ -60,9 +59,9 @@ public class Movement : MonoBehaviour
     }
 
     private void ProcessThrust(){
-        if(!playerAudioSource.isPlaying){
+        if(!playerAudioHandler.source.isPlaying){
             
-            playerAudioSource.Play();
+            playerAudioHandler.source.Play();
             
         }
         rocketRB.velocity = (rocketRB.velocity + new Vector3 (0, 4f, 0) * Time.deltaTime);
